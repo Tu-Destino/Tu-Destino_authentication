@@ -7,9 +7,9 @@ async function bootstrap() {
   const port = process.env.PORT || 4000;
 
   const config = new DocumentBuilder()
-    .setTitle('Users_PRO API')
+    .setTitle('TuDestino API')
     .setDescription(
-      'The library API is a simple manager system that allows you to manage books and authors.',
+      'TuDestino API is a role authentication and authorization system.',
     )
     .setVersion('1.0')
     .addTag('users')

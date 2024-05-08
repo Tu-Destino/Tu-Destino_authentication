@@ -3,6 +3,7 @@ import { UsersModule } from './modules/users/users.module';
 import dbConfig from './libs/persistance/db-config';
 import { ConfigModule } from '@nestjs/config';
 import { PersistenceModule } from './libs/persistance/persistance.module';
+import { AuthModule } from './libs/auth/auth.module';
 
 
 @Module({
@@ -13,6 +14,7 @@ import { PersistenceModule } from './libs/persistance/persistance.module';
       isGlobal: true,
     }),
     PersistenceModule,
+    AuthModule,
     UsersModule,
   ],
   controllers: [],
