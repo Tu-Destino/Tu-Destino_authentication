@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable, InternalServerErrorException, NotFoundException, Post } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../entities/user.entity';
@@ -8,16 +8,30 @@ import { Model } from 'mongoose';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
-  create(createUserDto: CreateUserDto) {
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
     return this.userModel.create(createUserDto);
   }
 
-  findOneByEmail(email: string){
-    return this.userModel.findOne({email})
+
+  async findOneByEmailRegister(email: string): Promise<User> {
+    const user = await this.userModel.findOne({ email }).exec();
+    if (user) {
+      throw new NotFoundException(`User with email ${email} already exists`);
+    }
+    return user;
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findOneByEmail(email: string): Promise<User> {
+    const user = await this.userModel.findOne({ email }).exec();
+    if (!user) {
+      throw new NotFoundException(`User with email ${email} not found`);
+    }
+    return user;
+  }
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().exec();
   }
 
   findOne(id: number) {

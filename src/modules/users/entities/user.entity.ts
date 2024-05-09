@@ -12,6 +12,12 @@ import {
 } from 'class-validator';
 import { Document } from 'mongoose';
 
+export enum UserRole {
+    USER = 'user',
+    ADMIN = 'admin',
+    SUPERADMIN = 'superAdmin',
+  }
+
 
 @Schema({ timestamps: true })
 export class User extends Document {
@@ -53,7 +59,7 @@ export class User extends Document {
     @Prop({
         default: 'user'
     })
-    role: string;
+    role?: string;
 
 }
 
