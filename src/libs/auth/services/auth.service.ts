@@ -40,47 +40,62 @@ export class AuthService {
 
 
   async login(userLogInDto: loginDto) {
-    const user = await this.usersService.findOneByEmail(userLogInDto.email);
-    if (!user) {
-      throw new BadRequestException('User not found');
+    try {
+      const user = await this.usersService.findOneByEmail(userLogInDto.email);
+      if (!user) {
+        throw new BadRequestException('User not found');
+      }
+
+      const isPasswordValid = await this.hashService.compare(
+        userLogInDto.password,
+        user.password,
+      );
+      if (!isPasswordValid) {
+        throw new BadRequestException('Incorrect password');
+      }
+
+      return await this.getTokens({
+        role: user.role,
+      });
+    } catch (error) {
+      this.errorService.createError(error)
     }
 
-    const isPasswordValid = await this.hashService.compare(
-      userLogInDto.password,
-      user.password,
-    );
-    if (!isPasswordValid) {
-      throw new BadRequestException('Incorrect password');
-    }
-
-    return await this.getTokens({
-      role: user.role,
-    });
   }
   async getTokens(jwtPayload: JwtPayload): Promise<Tokens> {
-    const secretKey = process.env.JWT_SECRET;
-    if (!secretKey) {
-      throw new Error('JWT_SECRET is not set');
+    try {
+      const secretKey = process.env.JWT_SECRET;
+      if (!secretKey) {
+        throw new Error('JWT_SECRET is not set');
+      }
+      const accessTokenOptions = {
+        expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '1d',
+      };
+
+      const accessToken = await this.signToken(
+        jwtPayload,
+        secretKey,
+        accessTokenOptions,
+      );
+
+      return { access_token: accessToken };
+    } catch (error) {
+      this.errorService.createError(error)
     }
-    const accessTokenOptions = {
-      expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '1d',
-    };
 
-    const accessToken = await this.signToken(
-      jwtPayload,
-      secretKey,
-      accessTokenOptions,
-    );
-
-    return { access_token: accessToken };
   }
 
 
   async signToken(payload: JwtPayload, secretKey: string, options: any) {
-    return await this.jwtService.signAsync(payload, {
-      secret: secretKey,
-      ...options,
-    });
+    try {
+      return await this.jwtService.signAsync(payload, {
+        secret: secretKey,
+        ...options,
+      });
+    } catch (error) {
+      this.errorService.createError(error)
+    }
+
   }
 
 }
