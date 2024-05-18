@@ -31,18 +31,19 @@ To run the project locally, clone the repository and configure the necessary env
     ```shell
     .env.example .env
    ```  
-   Edit the .env file and configure the following values:
+
+4.   Edit the .env file and configure the following values:
     ```shell
-  DB_CONNECTION=mongodb://
-   DB_HOST=localhost:27017
-   DB_NAME=your_database_name
-   DB_USER=your_database_user
-   DB_PASSWORD=your_database_password
-   JWT_SECRET=your_secret_key
-   ACCESS_TOKEN_EXPIRY=1d
-   PORT=3000
-   ENVIROMENTS='production'
-  ```
+        DB_CONNECTION=mongodb://
+        DB_HOST=localhost:27017
+        DB_NAME=your_database_name
+        DB_USER=your_database_user
+        DB_PASSWORD=your_database_password
+        JWT_SECRET=your_secret_key
+        ACCESS_TOKEN_EXPIRY=1d
+        PORT=3000
+        ENVIROMENTS='production'
+    ```
 Estos pasos garantizan que tengas toda la configuración necesaria para ejecutar el proyecto localmente, ajustando las variables de entorno según las necesidades de tu entorno de desarrollo.
                    
 
