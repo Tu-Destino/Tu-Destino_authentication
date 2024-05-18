@@ -1,8 +1,9 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { registerDto } from '../dto/register.dto';
 import { loginDto } from '../dto/login.dto';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOperation, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOperation, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { AtGuard } from '../guards/at.guard';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -33,5 +34,13 @@ export class AuthController {
     const token = await this.authService.login(userLogInDto);
 
     return { access_token: token.access_token };
+  }
+
+  @Post('check')
+  @UseGuards(AtGuard)
+  @ApiBearerAuth()
+  @HttpCode(HttpStatus.OK)
+  async check() {
+    return true;
   }
 }

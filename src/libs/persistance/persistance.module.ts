@@ -10,9 +10,9 @@ import dbConfig from './db-config';
       useFactory: (configService: ConfigType<typeof dbConfig>) => {
         const { db, env } = configService;
         const uriDb =
-          env === 'local'
-            ? `${db.connection}${db.host}/${db.name}`
-            : `mongodb+srv://${db.user}:${db.password}@cluster0.mongodb.net/${db.name}?retryWrites=true&w=majority`;
+          env === process.env.ENVIROMENTS
+            ? `${db.connection}${db.host}/${db.name}` 
+            : `mongodb+srv://${db.user}:${db.password}@tudestino.nwd4noa.mongodb.net/${db.name}?retryWrites=true&w=majority`
         return {
           uri: uriDb,
         };
