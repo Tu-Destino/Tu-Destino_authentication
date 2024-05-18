@@ -24,9 +24,9 @@ To run the project locally, clone the repository and configure the necessary env
    cd Tu-Destino_authentication
    
 2. Install the necessary dependencies:
-   
+   ```shell
    npm install
-    
+     ``` 
 3. Copy the .env.example file to a new .env file and set the necessary environment variables:
     ```shell
     .env.example .env
@@ -44,7 +44,7 @@ To run the project locally, clone the repository and configure the necessary env
    ENVIROMENTS='production'
   ```
 Estos pasos garantizan que tengas toda la configuración necesaria para ejecutar el proyecto localmente, ajustando las variables de entorno según las necesidades de tu entorno de desarrollo.
-                   ```
+                   
 
 ## Development Commands
 
@@ -61,6 +61,8 @@ To start the server in development mode, use:
 npm run build
 npm start
 ```
+
+## Project Folder Structure
 
 - `/auth`: Contains the components related to authentication, such as drivers, services, strategies and guards.
     - `/controllers`: Controller that handles authentication-related HTTP requests.
