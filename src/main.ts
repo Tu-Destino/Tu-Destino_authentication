@@ -9,12 +9,12 @@ async function bootstrap() {
   const port = process.env.PORT || 4000;
 
   const config = new DocumentBuilder()
-    .setTitle('TuDestino API')
+    .setTitle('TuDestino authentication - v1')
     .setDescription(
-      'TuDestino API is a role authentication and authorization system.',
+      'Implementation of authentication and authorization.',
     )
     .setVersion('1.0')
-    .addTag('users')
+    .addTag('Swagger')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
