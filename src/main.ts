@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('v1/api', { exclude: ['/'] });
   app.enableCors({
-    origin: 'https://tu-destino-authentication.onrender.com', 
+    origin: '*', 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
     credentials: true,
