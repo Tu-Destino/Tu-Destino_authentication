@@ -5,7 +5,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('v1/api', { exclude: ['/'] });
-  app.enableCors();
+  app.enableCors({
+    origin: 'https://tu-destino-authentication.onrender.com', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+    credentials: true,
+  });
   const port = process.env.PORT || 4000;
 
   const config = new DocumentBuilder()
