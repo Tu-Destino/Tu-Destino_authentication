@@ -12,7 +12,7 @@ import dbConfig from './db-config';
         const uriDb =
           env === process.env.ENVIROMENTS
             ? `${db.connection}${db.host}/${db.name}` 
-            : `mongodb+srv://${db.user}:${db.password}@tudestino.nwd4noa.mongodb.net/${db.name}?retryWrites=true&w=majority`
+            : `${db.mongo}/${db.name}?retryWrites=true&w=majority`
         return {
           uri: uriDb,
         };
