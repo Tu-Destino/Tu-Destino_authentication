@@ -24,27 +24,28 @@ To run the project locally, clone the repository and configure the necessary env
    cd Tu-Destino_authentication
    
 2. Install the necessary dependencies:
-   
+   ```shell
    npm install
-    
+     ``` 
 3. Copy the .env.example file to a new .env file and set the necessary environment variables:
     ```shell
     .env.example .env
    ```  
-   Edit the .env file and configure the following values:
+
+4.   Edit the .env file and configure the following values:
     ```shell
-  DB_CONNECTION=mongodb://
-   DB_HOST=localhost:27017
-   DB_NAME=your_database_name
-   DB_USER=your_database_user
-   DB_PASSWORD=your_database_password
-   JWT_SECRET=your_secret_key
-   ACCESS_TOKEN_EXPIRY=1d
-   PORT=3000
-   ENVIROMENTS='production'
-  ```
+        DB_CONNECTION=mongodb://
+        DB_HOST=localhost:27017
+        DB_NAME=your_database_name
+        DB_USER=your_database_user
+        DB_PASSWORD=your_database_password
+        JWT_SECRET=your_secret_key
+        ACCESS_TOKEN_EXPIRY=1d
+        PORT=3000
+        ENVIROMENTS='production'
+    ```
 Estos pasos garantizan que tengas toda la configuración necesaria para ejecutar el proyecto localmente, ajustando las variables de entorno según las necesidades de tu entorno de desarrollo.
-                   ```
+                   
 
 ## Development Commands
 
@@ -61,6 +62,8 @@ To start the server in development mode, use:
 npm run build
 npm start
 ```
+
+## Project Folder Structure
 
 - `/auth`: Contains the components related to authentication, such as drivers, services, strategies and guards.
     - `/controllers`: Controller that handles authentication-related HTTP requests.

@@ -3,8 +3,9 @@ import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { UserRole } from '../entities/user.entity';
-import { AtGuard } from 'src/libs/auth/guards/at.guard';
 import { Roles } from 'src/libs/decorators/roles.decorator';
+import { AtGuard } from 'src/libs/auth/guards/at.guard';
+
 
 @ApiTags('users')
 @ApiBearerAuth()
