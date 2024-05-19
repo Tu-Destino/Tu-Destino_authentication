@@ -29,6 +29,7 @@ export class AuthService {
       });
 
       return await this.getTokens({
+        id: user.id,
         role: user.role,
       });
 
@@ -55,6 +56,7 @@ export class AuthService {
       }
 
       return await this.getTokens({
+        id: user.id,
         role: user.role,
       });
     } catch (error) {

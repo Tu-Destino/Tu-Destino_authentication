@@ -1,0 +1,48 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      ACCESS_TOKEN_EXPIRY: ${{ secrets.ACCESS_TOKEN_EXPIRY }}
+      PORT: ${{ secrets.PORT }}
+      ENVIROMENTS: ${{ secrets.ENVIROMENTS }}
+      RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Deploy to Render
+        env:
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+        run: |
+          curl -X POST \
+          -H 'Authorization: Bearer ${{ secrets.RENDER_API_KEY }}' \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -d '{"serviceId": "${{ secrets.RENDER_SERVICE_ID }}"}' \
+          https://api.render.com/v1/deploys
