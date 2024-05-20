@@ -1,24 +1,30 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { cors } from 'cors';
+
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const port = process.env.PORT || 4000;
+  const app = await NestFactory.create(AppModule, { cors: true });
+  app.setGlobalPrefix('v1/api', { exclude: ['/'] });
+  app.enableCors()
+
+  const port = process.env.PORT || 3000;
 
   const config = new DocumentBuilder()
-    .setTitle('TuDestino API')
+    .setTitle('TuDestino authentication - v1')
     .setDescription(
-      'TuDestino API is a role authentication and authorization system.',
+      'Implementation of authentication and authorization.',
     )
     .setVersion('1.0')
-    .addTag('users')
+    .addTag('Swagger')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  app.setGlobalPrefix('/v1/api');
+
   await app.listen(port);
-  console.log(`Application is running on: http://localhost:${port}/v1/api`);
+  console.log(` Application is running on: http: //localhost:${port}/v1/api`);
 }
 bootstrap();

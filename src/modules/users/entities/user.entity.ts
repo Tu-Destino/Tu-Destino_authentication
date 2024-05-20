@@ -12,16 +12,16 @@ import {
 } from 'class-validator';
 import { Document } from 'mongoose';
 
+export enum UserRole {
+    USER = 'user',
+    ADMIN = 'admin',
+    SUPERADMIN = 'superAdmin',
+}
+
 
 @Schema({ timestamps: true })
 export class User extends Document {
-    @IsNumber()
-    @Prop({
-        primary:true,
-        generated:true
-    })
-    id: number;
-
+  
     @IsOptional()
     @IsString()
     @Length(3, 50)
@@ -33,7 +33,7 @@ export class User extends Document {
     @Prop({
         required: true,
         unique: true,
-        nullable:false
+        nullable: false
     })
     email: string;
 
@@ -46,14 +46,14 @@ export class User extends Document {
     })
     @Prop({
         required: true,
-        nullable:false
+        nullable: false
     })
     password: string;
 
-    @Prop({
-        default: 'user'
-    })
-    role: string;
+    @IsOptional()
+    @IsEnum(UserRole)
+    @Prop({ type: String, enum: UserRole, default: UserRole.USER })
+    role: UserRole;
 
 }
 
