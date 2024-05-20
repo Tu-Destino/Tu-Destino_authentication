@@ -31,6 +31,7 @@ export class AuthService {
       return await this.getTokens({
         id: user.id,
         role: user.role,
+        email: user.email,
       });
 
 
@@ -58,6 +59,7 @@ export class AuthService {
       return await this.getTokens({
         id: user.id,
         role: user.role,
+        email:user.email,
       });
     } catch (error) {
       this.errorService.createError(error)

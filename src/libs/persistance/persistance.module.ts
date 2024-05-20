@@ -10,9 +10,9 @@ import dbConfig from './db-config';
       useFactory: (configService: ConfigType<typeof dbConfig>) => {
         const { db, env } = configService;
         const uriDb =
-          env === process.env.ENVIROMENTS
+          env === 'production'
             ? `${db.connection}${db.host}/${db.name}` 
-            : `mongodb+srv://${db.user}:${db.password}@tudestino.nwd4noa.mongodb.net/${db.name}?retryWrites=true&w=majority`
+            : `mongodb+srv://${db.user}:${db.password}@tudestino.ptgqxki.mongodb.net/${db.name}?retryWrites=true&w=majority`
         return {
           uri: uriDb,
         };
