@@ -8,7 +8,6 @@ export default registerAs('dbConfig', () => {
       name: process.env.DB_NAME,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      mongo: process.env.DB_MONGO
       
     },
     env: process.env.NODE_ENV || 'local',
