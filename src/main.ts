@@ -9,7 +9,7 @@ async function bootstrap() {
   app.setGlobalPrefix('v1/api', { exclude: ['/'] });
   app.enableCors()
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 4000;
 
   const config = new DocumentBuilder()
     .setTitle('TuDestino authentication - v1')
@@ -24,7 +24,8 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
 
+
   await app.listen(port);
-  console.log(` Application is running on: http: //localhost:${port}/v1/api`);
+  console.log(` Application is running on: http://localhost:${port}/v1/api`);
 }
 bootstrap();
