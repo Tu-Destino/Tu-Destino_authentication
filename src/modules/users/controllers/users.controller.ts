@@ -69,4 +69,10 @@ export class UsersController {
     return this.usersService.updateRole(id, role, req.user);
   }
 
+  @Roles(UserRole.ADMIN, UserRole.SUPERADMIN)
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.usersService.remove(id);
+  }
+
 }

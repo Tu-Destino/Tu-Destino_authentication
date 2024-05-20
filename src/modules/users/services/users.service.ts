@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Injectable, InternalServerErrorException, NotFoundException, Post } from '@nestjs/common';
+import { BadRequestException, Body, Delete, Injectable, InternalServerErrorException, NotFoundException, Param, Post } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserRole } from '../entities/user.entity';
@@ -78,7 +78,20 @@ export class UsersService {
       };
     } catch (error) {
       this.errorService.createError(error);
-      throw new InternalServerErrorException('An error occurred while updating the user role');
+  
+    }
+  }
+
+  async remove(id: string): Promise<User> {
+    try {
+      const user = await this.userModel.findByIdAndDelete(id).exec();
+      if (!user) {
+        throw new NotFoundException(`User with id ${id} not found`);
+      }
+      return user;
+    } catch (error) {
+      this.errorService.createError(error);
+      throw new InternalServerErrorException('Failed to delete user');
     }
   }
 
