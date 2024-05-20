@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Request, UseGuards, Put } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { UserRole } from '../entities/user.entity';
 import { Roles } from 'src/libs/decorators/roles.decorator';
 import { AtGuard } from 'src/libs/auth/guards/at.guard';
+import { UpdateUserDto } from '../dto/update-user.dto';
 
 
 @ApiTags('users')
@@ -30,7 +31,7 @@ export class UsersController {
 
   
  
-  @Roles(UserRole.ADMIN)
+  @Roles(UserRole.ADMIN, UserRole.SUPERADMIN)
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({ description: 'Success' })
   @ApiNotFoundResponse({ description: 'Not Found' })
@@ -43,7 +44,11 @@ export class UsersController {
   }
 
 
-
+  @Roles()
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(id, updateUserDto); 
+  }
   
 
   @Roles(UserRole.SUPERADMIN)
