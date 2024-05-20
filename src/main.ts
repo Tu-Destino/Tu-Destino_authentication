@@ -9,7 +9,7 @@ async function bootstrap() {
   app.setGlobalPrefix('v1/api', { exclude: ['/'] });
   app.enableCors()
 
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 3000;
 
   const config = new DocumentBuilder()
     .setTitle('TuDestino authentication - v1')
