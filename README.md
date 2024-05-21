@@ -9,8 +9,15 @@ You can interact with the API using the following URL:
 [Go test the API](http://localhost:3000/api) -> To log in as admin you can use these credentials:
 ```json
 {
-  "email": "tudestino@prueba.com",
-  "password": "tudestino123",
+   "email":"cristian@gmail.com",
+    "password":"cristian123",
+    "role":"admin"
+}
+
+{
+    "email":"juanMa@gmail.com",
+    "password":"juanMa123",
+    "role":"superAdmin"
 }
 ```
 
