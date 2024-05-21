@@ -11,7 +11,7 @@ import dbConfig from './db-config';
         const { db, env } = configService;
         const uriDb =
           env === 'production'
-            ? `${db.connection}${db.host}/${db.name}` 
+            ? `mongodb+srv://tuDestino:${db.password}@tudestino.ptgqxki.mongodb.net/` 
             : `mongodb+srv://${db.user}:${db.password}@tudestino.ptgqxki.mongodb.net/${db.name}?retryWrites=true&w=majority`
         return {
           uri: uriDb,
