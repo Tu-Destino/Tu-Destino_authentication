@@ -11,13 +11,13 @@ You can interact with the API using the following URL:
 {
    "email":"cristian@gmail.com",
     "password":"cristian123",
-    "role":"admin"
+    "role":"admin",
 }
 
 {
     "email":"juanMa@gmail.com",
     "password":"juanMa123",
-    "role":"superAdmin"
+    "role":"superAdmin",
 }
 ```
 
